@@ -10,6 +10,7 @@ class InvalidCustomRegistrationSerializer(RegisterSerializer):
     limit_inv = serializers.CharField(required=True)
     fio = serializers.CharField(required=True)
 
+
     def get_cleaned_data(self):
         data = super(InvalidCustomRegistrationSerializer, self).get_cleaned_data()
         extra_data = {
@@ -63,6 +64,7 @@ class InvalidSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Invalid
+        depth = 1
         fields = '__all__'
 
 
@@ -71,6 +73,8 @@ class VolunteerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Volunteer
+        depth = 1
+        fields = '__all__'
         fields = '__all__'
 
 
@@ -81,3 +85,11 @@ class HelpRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = HelpRequest
         fields = '__all__'
+
+
+class UserSerializer(serializers.ModelSerializer):
+    #helprequest = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+
+    class Meta:
+        model = User
+        fields = ("id", "is_superuser", "username", "email", "date_joined", "is_invalid", "is_volunteer")

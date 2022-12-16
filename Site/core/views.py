@@ -40,10 +40,15 @@ class HelpRequestList(generics.ListCreateAPIView):
     queryset = HelpRequest.objects.filter(helper='')
     serializer_class = HelpRequestSerializer
 
-    #def perform_create(self, serializer):
+    # def perform_create(self, serializer):
     #    serializer.save(owner=self.request.user)
 
 
 class HelpRequestDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = HelpRequest.objects.all()
     serializer_class = HelpRequestSerializer
+
+
+class UsersList(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
